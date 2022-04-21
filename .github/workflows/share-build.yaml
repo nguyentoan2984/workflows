@@ -15,6 +15,10 @@ on:
       envPAT:
         required: true
 
+env:
+  SERVICE: ${{ inputs.service }}
+  ENVIRONMENT: ${{ inputs.environment }}
+
 jobs:
   build-docker:
     runs-on: self-hosted
