@@ -1,15 +1,22 @@
 on:
   workflow_call:
     inputs:
-      username:
+      environment:
         required: false
         type: string
+      service:
+        required: false
+        type: string
+      build_type:
+        required: true
+        type: string
+        default: docker
     secrets:
       envPAT:
         required: true
 
 jobs:
-  share_build_workflow:
+  build-docker:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
