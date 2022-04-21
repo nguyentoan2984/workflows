@@ -17,5 +17,5 @@ jobs:
           repository: cocdibui/actions
           token: ${{ secrets.envPAT }}
           path: coinmap-actions
-      - uses: ./coinmap-actions/build
+      - uses: ./coinmap-actions/notification
 
