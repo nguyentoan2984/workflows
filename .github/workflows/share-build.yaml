@@ -57,3 +57,6 @@ jobs:
       - uses: ./coinmap-actions/deploy
         with:
           version: ${{needs.build-docker.outputs.build-version}}
+      - uses: ./coinmap-actions/notification
+        with:
+          version: ${{needs.build-docker.outputs.build-version}}
