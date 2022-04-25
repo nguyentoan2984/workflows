@@ -17,7 +17,6 @@ on:
 
 env:
   SERVICE: ${{ inputs.service }}
-  ENVIRONMENT: ${{ inputs.environment }}
 
 jobs:
   build-react-stockcharts:
@@ -54,9 +53,11 @@ jobs:
           repository: cocdibui/actions
           token: ${{ secrets.envPAT }}
           path: coinmap-actions
-      - uses: ./coinmap-actions/deploy
+      - id: deploy
+        uses: ./coinmap-actions/deploy
         with:
           version: ${{needs.build-docker.outputs.build-version}}
       - uses: ./coinmap-actions/notification
         with:
           version: ${{needs.build-docker.outputs.build-version}}
+          environment: ${{ steps.deploy.outputs.environment }}
