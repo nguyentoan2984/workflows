@@ -26,7 +26,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: cocdibui/actions
+          repository: CoinmapTrading/actions
           token: ${{ secrets.envPAT }}
           path: coinmap-actions
       - uses: ./coinmap-actions/build-react-stockcharts
@@ -39,7 +39,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: cocdibui/actions
+          repository: CoinmapTrading/actions
           token: ${{ secrets.envPAT }}
           path: coinmap-actions
       - id: build
@@ -51,7 +51,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: cocdibui/actions
+          repository: CoinmapTrading/actions
           token: ${{ secrets.envPAT }}
           path: coinmap-actions
       - id: deploy
