@@ -33,7 +33,6 @@ jobs:
 
   build-docker:
     runs-on: self-hosted
-    needs: [build-react-stockcharts]
     outputs:
       build-version: ${{ steps.build.outputs.build-version }}
     steps:
@@ -47,7 +46,7 @@ jobs:
 
   deploy:
     runs-on: self-hosted
-    needs: [build-react-stockcharts, build-docker]
+    needs: [build-docker]
     steps:
       - uses: actions/checkout@v3
         with:
