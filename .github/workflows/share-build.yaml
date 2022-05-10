@@ -28,8 +28,8 @@ jobs:
         with:
           repository: CoinmapTrading/actions
           token: ${{ secrets.envPAT }}
-          path: coinmap-actions
-      - uses: ./coinmap-actions/build-react-stockcharts
+          path: ~/private_action/coinmap-actions
+      - uses: ~/private_action/coinmap-actions/build-react-stockcharts
 
   build-docker:
     needs: [build-react-stockcharts]
@@ -42,9 +42,9 @@ jobs:
         with:
           repository: CoinmapTrading/actions
           token: ${{ secrets.envPAT }}
-          path: coinmap-actions
+          path: ~/private_action/coinmap-actions
       - id: build
-        uses: ./coinmap-actions/build
+        uses: ~/private_action/coinmap-actions/build
 
   deploy:
     runs-on: self-hosted
@@ -54,12 +54,12 @@ jobs:
         with:
           repository: CoinmapTrading/actions
           token: ${{ secrets.envPAT }}
-          path: coinmap-actions
+          path: ~/private_action/coinmap-actions
       - id: deploy
-        uses: ./coinmap-actions/deploy
+        uses: ~/private_action/coinmap-actions/deploy
         with:
           version: ${{needs.build-docker.outputs.build-version}}
-      - uses: ./coinmap-actions/notification
+      - uses: ~/private_action/coinmap-actions/notification
         with:
           version: ${{needs.build-docker.outputs.build-version}}
           environment: ${{ steps.deploy.outputs.environment }}
