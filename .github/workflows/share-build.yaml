@@ -47,8 +47,9 @@ jobs:
         uses: ./coinmap-actions/build
 
   deploy:
-    runs-on: self-hosted
     needs: [build-docker]
+    if: "!${{ failure() }}"
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
         with:
