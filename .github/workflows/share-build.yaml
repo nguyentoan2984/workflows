@@ -33,7 +33,7 @@ jobs:
 
   build-docker:
     needs: [build-react-stockcharts]
-    if: ${{ always() }}
+    if: "!${{ failure() }}"
     runs-on: self-hosted
     outputs:
       build-version: ${{ steps.build.outputs.build-version }}
@@ -64,3 +64,19 @@ jobs:
         with:
           version: ${{needs.build-docker.outputs.build-version}}
           environment: ${{ steps.deploy.outputs.environment }}
+
+  notification:
+    needs: [build-docker,deploy]
+    if: "${{ failure() }}"
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          repository: CoinmapTrading/actions
+          token: ${{ secrets.envPAT }}
+          path: coinmap-actions
+      - uses: ./coinmap-actions/notification
+        with:
+          version: ${{needs.build-docker.outputs.build-version}}
+          environment: ${{ steps.deploy.outputs.environment }}
+          status: "failure"
