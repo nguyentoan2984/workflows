@@ -32,6 +32,8 @@ jobs:
       - uses: ./coinmap-actions/build-react-stockcharts
 
   build-docker:
+    needs: [build-react-stockcharts]
+    if: ${{ always() }}
     runs-on: self-hosted
     outputs:
       build-version: ${{ steps.build.outputs.build-version }}
