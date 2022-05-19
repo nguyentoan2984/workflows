@@ -48,7 +48,7 @@ jobs:
 
   deploy:
     needs: [build-docker]
-    if: "${{ success() }}"
+    if: "!${{ failure() }}"
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
