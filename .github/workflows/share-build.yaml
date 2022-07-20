@@ -19,21 +19,21 @@ env:
   SERVICE: ${{ inputs.service }}
 
 jobs:
-  build-react-stockcharts:
-    if: contains(github.repository, 'star-flow')
-    runs-on: self-hosted
-    container: node:14.18.2-alpine
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          repository: CoinmapTrading/actions
-          token: ${{ secrets.envPAT }}
-          path: coinmap-actions
-      - uses: ./coinmap-actions/build-react-stockcharts
+  # build-react-stockcharts:
+  #   if: contains(github.repository, 'star-flow')
+  #   runs-on: self-hosted
+  #   container: node:14.18.2-alpine
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #       with:
+  #         repository: CoinmapTrading/actions
+  #         token: ${{ secrets.envPAT }}
+  #         path: coinmap-actions
+  #     - uses: ./coinmap-actions/build-react-stockcharts
 
   build-docker:
-    needs: [build-react-stockcharts]
-    if: "!${{ failure() }}"
+    # needs: [build-react-stockcharts]
+    # if: "!${{ failure() }}"
     runs-on: self-hosted
     outputs:
       build-version: ${{ steps.build.outputs.build-version }}
